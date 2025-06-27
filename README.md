@@ -16,8 +16,18 @@ Feel free to [report any issues](https://github.com/marsinator358/luajit-decompi
 
 ## TODO
 
+### marsinator358
+
 * bytecode big endian support
 * improved decompilation logic for conditional assignments
+
+### IamLupo
+
+* Make Cmake compantable with windows and linux and different compilers: GCC, Visual studio, Clang, Mingw32, Mingw64.
+* Fix: header problems.
+* Fix: char can be unsigned char problem
+* Add test procedure
+* Multithread support?
 
 ---
 
