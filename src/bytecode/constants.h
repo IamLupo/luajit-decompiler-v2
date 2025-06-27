@@ -1,3 +1,5 @@
+#include <bytecode/bytecode.h>
+
 static constexpr uint8_t BC_HEADER[] = { '\x1B', 'L', 'J' };
 static constexpr uint8_t BC_HEADER_FS[] = { '\x1B', 'F', 'S' };
 static constexpr uint8_t BC_VERSION_1 = 1;
@@ -22,7 +24,7 @@ enum BC_KTAB {
 	BC_KTAB_STR  // string constant
 };
 
-struct Bytecode::TableConstant {
+struct TableConstant {
 	BC_KTAB type;
 
 	union {
@@ -33,9 +35,9 @@ struct Bytecode::TableConstant {
 	std::string string;
 };
 
-struct Bytecode::TableNode {
-	TableConstant key;
-	TableConstant value;
+struct TableNode {
+	Bytecode::TableConstant key;
+	Bytecode::TableConstant value;
 };
 
 enum BC_KGC {
@@ -47,11 +49,11 @@ enum BC_KGC {
 	BC_KGC_STR // string constant
 };
 
-struct Bytecode::Constant {
+struct Constant {
 	BC_KGC type;
-	const Prototype* prototype = nullptr;
-	std::vector<TableConstant> array;
-	std::vector<TableNode> table;
+	const Bytecode::Prototype* prototype = nullptr;
+	std::vector<Bytecode::TableConstant> array;
+	std::vector<Bytecode::TableNode> table;
 	uint64_t cdata = 0;
 	std::string string;
 };
@@ -61,7 +63,7 @@ enum BC_KNUM {
 	BC_KNUM_NUM // number constant
 };
 
-struct Bytecode::NumberConstant {
+struct NumberConstant {
 	BC_KNUM type;
 	
 	union {
@@ -81,7 +83,7 @@ enum BC_VAR {
 	BC_VAR_STR // local variable name
 };
 
-struct Bytecode::VariableInfo {
+struct VariableInfo {
 	BC_VAR type;
 	std::string name;
 	bool isParameter = false;

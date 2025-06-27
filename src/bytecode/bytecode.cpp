@@ -1,4 +1,7 @@
-#include "..\main.h"
+#include <windows.h>
+
+#include <bytecode/bytecode.h>
+#include <main.h>
 
 Bytecode::Bytecode(const std::string& filePath) : filePath(filePath) {}
 

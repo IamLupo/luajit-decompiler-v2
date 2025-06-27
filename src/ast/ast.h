@@ -1,31 +1,50 @@
-class Ast {
-private:
+#ifndef AST_H
+#define AST_H
 
+#include <vector>
+#include <unordered_map>
+#include <string>
+
+#include <bytecode\bytecode.h>
+
+class Ast
+{
+public:
 	static constexpr uint32_t INVALID_ID = -1;
 
-	enum CONSTANT_TYPE {
+	enum CONSTANT_TYPE : uint8_t
+	{
 		INVALID_CONSTANT,
 		NIL_CONSTANT,
 		BOOL_CONSTANT,
 		NUMBER_CONSTANT
 	};
 
+	struct BinaryOperation;
+	struct ConditionBuilder;
+	struct Constant;
+	struct Expression;
+	struct Function;
+	struct FunctionCall;
 	struct Local;
 	struct SlotScope;
-	struct ConditionBuilder;
-
-public:
-	struct Expression;
-	struct Constant;
-	struct Variable;
-	struct FunctionCall;
-	struct Table;
-	struct BinaryOperation;
-	struct UnaryOperation;
 	struct Statement;
-	struct Function;
-	#include "building_blocks.h"
-	#include "function.h"
+	struct Table;
+	struct UnaryOperation;
+	struct Variable;
+
+#include <ast/binary_operation.h>
+#include <ast/condition_builder.h>
+#include <ast/constant.h>
+#include <ast/expression.h>
+#include <ast/function.h>
+#include <ast/functioncall.h>
+#include <ast/local.h>
+#include <ast/slotscope.h>
+#include <ast/statement.h>
+#include <ast/table.h>
+#include <ast/unary_operation.h>
+#include <ast/variable.h>
 
 	Ast(const Bytecode& bytecode, const bool& ignoreDebugInfo, const bool& minimizeDiffs);
 	~Ast();
@@ -35,9 +54,6 @@ public:
 	Function* chunk = nullptr;
 
 private:
-
-	#include "conditionBuilder.h"
-
 	struct BlockInfo {
 		uint32_t index = INVALID_ID;
 		std::vector<Statement*>& block;
@@ -46,7 +62,11 @@ private:
 
 	Function*& new_function(const Bytecode::Prototype& prototype, const uint32_t& level);
 	Statement*& new_statement(const AST_STATEMENT& type);
+
+public:
 	Expression*& new_expression(const AST_EXPRESSION& type);
+
+private:
 	void build_functions(Function& function, uint32_t& functionCounter);
 	void build_instructions(Function& function);
 	void assign_debug_info(Function& function);
@@ -65,7 +85,11 @@ private:
 	Expression* new_slot(const uint8_t& slot);
 	Expression* new_literal(const uint8_t& literal);
 	Expression* new_signed_literal(const uint16_t& signedLiteral);
+
+public:
 	Expression* new_primitive(const uint8_t& primitive);
+
+private:
 	Expression* new_number(const Function& function, const uint16_t& index);
 	Expression* new_string(const Function& function, const uint16_t& index);
 	Expression* new_table(const Function& function, const uint16_t& index);
@@ -88,3 +112,5 @@ private:
 	std::vector<Expression*> expressions;
 	uint64_t prototypeDataLeft = 0;
 };
+
+#endif // AST_H

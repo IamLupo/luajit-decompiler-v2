@@ -1,4 +1,7 @@
-class Bytecode::Prototype {
+
+
+class Prototype
+{
 public:
 
 	Prototype(const Bytecode& bytecode);
@@ -14,13 +17,13 @@ public:
 		uint32_t lineCount = 0;
 	} header;
 
-	std::vector<Instruction> instructions;
+	std::vector<Bytecode::Instruction> instructions;
 	std::vector<uint16_t> upvalues;
-	std::vector<Constant> constants;
-	std::vector<NumberConstant> numberConstants;
+	std::vector<Bytecode::Constant> constants;
+	std::vector<Bytecode::NumberConstant> numberConstants;
 	std::vector<uint32_t> lineMap;
 	std::vector<std::string> upvalueNames;
-	std::vector<VariableInfo> variableInfos;
+	std::vector<Bytecode::VariableInfo> variableInfos;
 	uint32_t prototypeSize = 0;
 
 private:
@@ -35,7 +38,7 @@ private:
 	uint32_t get_uleb128();
 	uint32_t get_uleb128_33();
 	std::string get_string();
-	TableConstant get_table_constant();
+	Bytecode::TableConstant get_table_constant();
 
 	const Bytecode& bytecode;
 };

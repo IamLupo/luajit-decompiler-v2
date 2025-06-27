@@ -1,3 +1,6 @@
+#ifndef AST_EXPRESSION_H
+#define AST_EXPRESSION_H
+
 enum AST_EXPRESSION {
 	AST_EXPRESSION_CONSTANT,
 	AST_EXPRESSION_VARARG,
@@ -91,30 +94,6 @@ struct Ast::Expression {
 		UnaryOperation* unaryOperation;
 		uint8_t returnCount;
 	};
-};
-
-enum AST_CONSTANT {
-	AST_CONSTANT_NIL,
-	AST_CONSTANT_FALSE,
-	AST_CONSTANT_TRUE,
-	AST_CONSTANT_NUMBER,
-	AST_CONSTANT_CDATA_SIGNED,
-	AST_CONSTANT_CDATA_UNSIGNED,
-	AST_CONSTANT_CDATA_IMAGINARY,
-	AST_CONSTANT_STRING
-};
-
-struct Ast::Constant {
-	AST_CONSTANT type;
-
-	union {
-		double number;
-		int64_t signed_integer;
-		uint64_t unsigned_integer = 0;
-	};
-
-	std::string string;
-	bool isName = false;
 };
 
 enum AST_VARIABLE {
@@ -261,3 +240,5 @@ struct Ast::Statement {
 		Expression* multresReturn = nullptr;
 	} assignment;
 };
+
+#endif // AST_EXPRESSION_H

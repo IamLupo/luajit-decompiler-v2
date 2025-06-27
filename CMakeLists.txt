@@ -15,9 +15,21 @@ add_executable(luajit-decompiler-v2
 	src/main.cpp
 	src/ast/ast.h
 	src/ast/ast.cpp
-	src/ast/building_blocks.h
-	src/ast/conditionBuilder.h
+	src/ast/binary_operation.h
+	src/ast/constant.h
+	src/ast/condition_builder.h
+	src/ast/condition_builder.cpp
+	src/ast/expression.h
+	src/ast/expression.cpp
 	src/ast/function.h
+	src/ast/function.cpp
+	src/ast/functioncall.h
+	src/ast/local.h
+	src/ast/slotscope.h
+	src/ast/statement.h
+	src/ast/table.h
+	src/ast/unary_operation.h
+	src/ast/variable.h
 	src/bytecode/bytecode.h
 	src/bytecode/bytecode.cpp
 	src/bytecode/constants.h
@@ -33,9 +45,21 @@ if(MSVC)
 	source_group("ast" FILES
 		src/ast/ast.h
 		src/ast/ast.cpp
-		src/ast/building_blocks.h
-		src/ast/conditionBuilder.h
+		src/ast/binary_operation.h
+		src/ast/constant.h
+		src/ast/condition_builder.h
+		src/ast/condition_builder.cpp
+		src/ast/expression.h
+		src/ast/expression.cpp
 		src/ast/function.h
+		src/ast/function.cpp
+		src/ast/functioncall.h
+		src/ast/local.h
+		src/ast/slotscope.h
+		src/ast/statement.h
+		src/ast/table.h
+		src/ast/unary_operation.h
+		src/ast/variable.h
 	)
 
 	source_group("bytecode" FILES

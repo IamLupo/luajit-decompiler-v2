@@ -1,4 +1,11 @@
-#include "main.h"
+#include <vector>
+#include <conio.h>
+#include <shlwapi.h>
+
+#include <main.h>
+#include <ast/ast.h>
+#include <bytecode/bytecode.h>
+#include <lua/lua.h>
 
 struct Error {
 	const std::string message;

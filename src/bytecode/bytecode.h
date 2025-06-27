@@ -1,3 +1,10 @@
+#ifndef BYTECODE_H
+#define BYTECODE_H
+
+#include <windows.h>
+#include <vector>
+#include <string>
+
 class Bytecode {
 public:
 
@@ -8,9 +15,10 @@ public:
 	struct TableNode;
 	struct VariableInfo;
 	struct Instruction;
-	#include "prototype.h"
-	#include "constants.h"
-	#include "instructions.h"
+
+	#include <bytecode/prototype.h>
+	#include <bytecode/constants.h>
+	#include <bytecode/instructions.h>
 
 	Bytecode(const std::string& filePath);
 	~Bytecode();
@@ -47,3 +55,5 @@ private:
 	std::vector<uint8_t> fileBuffer;
 	std::vector<Prototype*> prototypes;
 };
+
+#endif // BYTECODE_H

@@ -1,8 +1,13 @@
-#include "..\main.h"
+#include <string>
+#include <vector>
+
+#include <main.h>
+#include <ast\ast.h>
 
 Ast::Ast(const Bytecode& bytecode, const bool& ignoreDebugInfo, const bool& minimizeDiffs) : bytecode(bytecode), ignoreDebugInfo(ignoreDebugInfo), minimizeDiffs(minimizeDiffs) {}
 
-Ast::~Ast() {
+Ast::~Ast()
+{
 	for (uint32_t i = statements.size(); i--;) {
 		delete statements[i];
 	}

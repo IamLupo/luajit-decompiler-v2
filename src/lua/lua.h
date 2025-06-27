@@ -1,3 +1,8 @@
+#include <string>
+#include <ast/ast.h>
+
+class Bytecode;
+
 class Lua {
 public:
 
