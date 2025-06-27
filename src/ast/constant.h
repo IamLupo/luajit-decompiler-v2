@@ -3,7 +3,7 @@
 
 #include <ast/ast.h>
 
-enum AST_CONSTANT
+enum AST_CONSTANT : uint8_t
 {
 	AST_CONSTANT_NIL,
 	AST_CONSTANT_FALSE,

@@ -3,7 +3,7 @@
 
 #include <ast/ast.h>
 
-enum AST_VARIABLE
+enum AST_VARIABLE : uint8_t
 {
 	AST_VARIABLE_SLOT,
 	AST_VARIABLE_UPVALUE,

@@ -25,7 +25,8 @@ void Bytecode::operator()() {
 	erase_progress_bar();
 }
 
-void Bytecode::read_header() {
+void Bytecode::read_header()
+{
 	read_file(5);
 	assert(fileBuffer[0] == BC_HEADER[0] &&
 		(

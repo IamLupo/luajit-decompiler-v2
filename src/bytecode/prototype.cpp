@@ -1,9 +1,14 @@
 #include <main.h>
 #include <bytecode/bytecode.h>
 
-Bytecode::Prototype::Prototype(const Bytecode& bytecode) : bytecode(bytecode) {}
+Bytecode::Prototype::Prototype(const Bytecode& bytecode)
+		: bytecode(bytecode)
+{
 
-void Bytecode::Prototype::operator()(std::vector<Prototype*>& unlinkedPrototypes) {
+}
+
+void Bytecode::Prototype::operator()(std::vector<Prototype*>& unlinkedPrototypes)
+{
 	read_header();
 	read_instructions();
 	read_upvalues();
@@ -14,7 +19,8 @@ void Bytecode::Prototype::operator()(std::vector<Prototype*>& unlinkedPrototypes
 	unlinkedPrototypes.emplace_back(this);
 }
 
-void Bytecode::Prototype::read_header() {
+void Bytecode::Prototype::read_header()
+{
 	header.flags = get_next_byte();
 	assert(!(header.flags & ~(BC_PROTO_CHILD | BC_PROTO_VARARG | BC_PROTO_FFI)), "Prototype has invalid flags (" + byte_to_string(header.flags) + ")", bytecode.filePath, DEBUG_INFO);
 	header.parameters = get_next_byte();
@@ -30,7 +36,8 @@ void Bytecode::Prototype::read_header() {
 	header.lineCount = get_uleb128();
 }
 
-void Bytecode::Prototype::read_instructions() {
+void Bytecode::Prototype::read_instructions()
+{
 	for (uint32_t i = 0; i < instructions.size(); i++) {
 		instructions[i].type = get_op_type(get_next_byte(), bytecode.header.version);
 		assert(instructions[i].type < BC_OP_INVALID, "Prototype has invalid instruction (" + byte_to_string(instructions[i].type) + ")", bytecode.filePath, DEBUG_INFO);
@@ -70,14 +77,16 @@ void Bytecode::Prototype::read_instructions() {
 	}
 }
 
-void Bytecode::Prototype::read_upvalues() {
+void Bytecode::Prototype::read_upvalues()
+{
 	for (uint8_t i = 0; i < upvalues.size(); i++) {
 		upvalues[i] = get_next_byte();
 		upvalues[i] |= (uint16_t)get_next_byte() << 8;
 	}
 }
 
-void Bytecode::Prototype::read_constants(std::vector<Prototype*>& unlinkedPrototypes) {
+void Bytecode::Prototype::read_constants(std::vector<Prototype*>& unlinkedPrototypes)
+{
 	uint32_t type;
 
 	for (uint32_t i = 0; i < constants.size(); i++) {
@@ -126,7 +135,8 @@ void Bytecode::Prototype::read_constants(std::vector<Prototype*>& unlinkedProtot
 	}
 }
 
-void Bytecode::Prototype::read_number_constants() {
+void Bytecode::Prototype::read_number_constants()
+{
 	for (uint32_t i = 0; i < numberConstants.size(); i++) {
 		if (bytecode.fileBuffer[prototypeSize] & 0x01) {
 			numberConstants[i].type = BC_KNUM_NUM;
@@ -139,7 +149,8 @@ void Bytecode::Prototype::read_number_constants() {
 	}
 }
 
-void Bytecode::Prototype::read_debug_info() {
+void Bytecode::Prototype::read_debug_info()
+{
 	if (!header.hasDebugInfo) return;
 	lineMap.resize(instructions.size());
 
@@ -197,12 +208,14 @@ void Bytecode::Prototype::read_debug_info() {
 	variableInfos.shrink_to_fit();
 }
 
-uint8_t Bytecode::Prototype::get_next_byte() {
+uint8_t Bytecode::Prototype::get_next_byte()
+{
 	assert(prototypeSize < bytecode.fileBuffer.size(), "Prototype read would exceed end of buffer", bytecode.filePath, DEBUG_INFO);
 	return bytecode.fileBuffer[prototypeSize++];
 }
 
-uint32_t Bytecode::Prototype::get_uleb128() {
+uint32_t Bytecode::Prototype::get_uleb128()
+{
 	uint32_t uleb128 = get_next_byte();
 
 	if (uleb128 >= 0x80) {
@@ -219,7 +232,8 @@ uint32_t Bytecode::Prototype::get_uleb128() {
 	return uleb128;
 }
 
-uint32_t Bytecode::Prototype::get_uleb128_33() {
+uint32_t Bytecode::Prototype::get_uleb128_33()
+{
 	uint32_t uleb128_33 = get_next_byte() >> 1;
 
 	if (uleb128_33 >= 0x40) {
@@ -237,7 +251,8 @@ uint32_t Bytecode::Prototype::get_uleb128_33() {
 	return uleb128_33;
 }
 
-std::string Bytecode::Prototype::get_string() {
+std::string Bytecode::Prototype::get_string()
+{
 	std::string string;
 
 	for (uint8_t byte = get_next_byte(); byte; byte = get_next_byte()) {
@@ -247,7 +262,8 @@ std::string Bytecode::Prototype::get_string() {
 	return string;
 }
 
-Bytecode::TableConstant Bytecode::Prototype::get_table_constant() {
+Bytecode::TableConstant Bytecode::Prototype::get_table_constant()
+{
 	TableConstant tableConstant;
 	const uint32_t type = get_uleb128();
 
@@ -279,3 +295,4 @@ Bytecode::TableConstant Bytecode::Prototype::get_table_constant() {
 
 	return tableConstant;
 }
+

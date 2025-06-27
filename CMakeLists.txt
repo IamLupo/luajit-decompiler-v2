@@ -13,6 +13,7 @@ project(luajit-decompiler-v2 VERSION 1.0.0)
 add_executable(luajit-decompiler-v2
 	src/main.h
 	src/main.cpp
+
 	src/ast/ast.h
 	src/ast/ast.cpp
 	src/ast/binary_operation.h
@@ -30,12 +31,17 @@ add_executable(luajit-decompiler-v2
 	src/ast/table.h
 	src/ast/unary_operation.h
 	src/ast/variable.h
+
 	src/bytecode/bytecode.h
 	src/bytecode/bytecode.cpp
 	src/bytecode/constants.h
 	src/bytecode/instructions.h
+	src/bytecode/number_constant.h
 	src/bytecode/prototype.h
 	src/bytecode/prototype.cpp
+	src/bytecode/table.h
+	src/bytecode/variable_info.h
+
 	src/lua/lua.cpp
 	src/lua/lua.h
 )
@@ -67,8 +73,11 @@ if(MSVC)
 		src/bytecode/bytecode.cpp
 		src/bytecode/constants.h
 		src/bytecode/instructions.h
+		src/bytecode/number_constant.h
 		src/bytecode/prototype.h
 		src/bytecode/prototype.cpp
+		src/bytecode/table.h
+		src/bytecode/variable_info.h
 	)
 
 	source_group("lua" FILES

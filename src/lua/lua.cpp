@@ -1,5 +1,5 @@
-#include "lua\lua.h"
-#include "bytecode\bytecode.h"
+#include <lua/lua.h>
+#include <bytecode/bytecode.h>
 #include <main.h>
 
 Lua::Lua(const Bytecode& bytecode, const Ast& ast, const std::string& filePath, const bool& forceOverwrite, const bool& minimizeDiffs, const bool& unrestrictedAscii)

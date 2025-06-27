@@ -1,6 +1,7 @@
 static constexpr uint16_t BC_OP_JMP_BIAS = 0x8000;
 
-enum BC_OP {
+enum BC_OP : uint8_t
+{
 	BC_OP_ISLT, // if A<VAR> < D<VAR> then JMP
 	BC_OP_ISGE, // if not (A<VAR> < D<VAR>) then JMP
 	BC_OP_ISLE, // if A<VAR> <= D<VAR> then JMP
