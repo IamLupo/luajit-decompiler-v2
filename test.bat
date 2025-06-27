@@ -1,0 +1,1 @@
+"build/Release/luajit-decompiler-v2.exe" test/vermintide1/foundation/scripts/managers/managers.lua

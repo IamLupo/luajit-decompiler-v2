@@ -13,6 +13,8 @@ project(luajit-decompiler-v2 VERSION 1.0.0)
 add_executable(luajit-decompiler-v2
 	src/main.h
 	src/main.cpp
+	src/util.h
+	src/util.cpp
 
 	src/ast/ast.h
 	src/ast/ast.cpp
@@ -88,6 +90,8 @@ if(MSVC)
 	source_group("" FILES
 		src/main.cpp
 		src/main.h
+		src/util.cpp
+		src/util.h
 	)	
 
 	## Todo: Should be removed over time.

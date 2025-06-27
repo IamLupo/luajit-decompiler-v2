@@ -1,3 +1,6 @@
+#ifndef LUA_H
+#define LUA_H
+
 #include <string>
 #include <ast/ast.h>
 
@@ -53,3 +56,5 @@ class Lua
 		void close_file();
 		void write_file();
 };
+
+#endif // LUA_H

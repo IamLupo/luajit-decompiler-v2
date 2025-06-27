@@ -1,4 +1,5 @@
 #include <main.h>
+#include <util.h>
 #include <bytecode/bytecode.h>
 
 Bytecode::Prototype::Prototype(const Bytecode& bytecode)

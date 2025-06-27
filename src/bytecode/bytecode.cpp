@@ -1,6 +1,7 @@
 #include <windows.h>
 
 #include <bytecode/bytecode.h>
+#include <util.h>
 #include <main.h>
 
 Bytecode::Bytecode(const std::string& filePath) : filePath(filePath) {}

@@ -2,6 +2,7 @@
 #include <vector>
 
 #include <main.h>
+#include <util.h>
 #include <ast\ast.h>
 
 Ast::Ast(const Bytecode& bytecode, const bool& ignoreDebugInfo, const bool& minimizeDiffs) : bytecode(bytecode), ignoreDebugInfo(ignoreDebugInfo), minimizeDiffs(minimizeDiffs) {}
